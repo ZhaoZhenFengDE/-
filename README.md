@@ -1,6 +1,6 @@
-# fgfont
+# FGFont
 
-> A Vue.js project
+> 花礼网前端
 
 ## Build Setup
 
