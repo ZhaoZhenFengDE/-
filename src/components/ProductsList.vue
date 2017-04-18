@@ -1,11 +1,10 @@
 <template>
     <div class="g-doc">
-        <main-nav></main-nav>
         <div class="g-bread">
             <div class="bread-crumb">
                 <el-breadcrumb separator=">">
                     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                    <el-breadcrumb-item>商品列表</el-breadcrumb-item>
+                    <el-breadcrumb-item >商品列表</el-breadcrumb-item>
                 </el-breadcrumb>
                 <h2 class="b-dis">商品列表</h2>
             </div>
@@ -87,7 +86,24 @@
                 </div>
             </div>
             <div class="main">
-                <card></card>
+                <el-row>
+                    <el-col :span="8" v-for="item in items">
+                        <el-card class="card" :body-style="{padding:'0'}">
+                            <router-link :to="{ path: '/products/pud/'}">
+                                <img :src = "item.commodity_pic" class="image">
+                                <h3>{{item.commodity_name}}</h3>
+                                <span>￥{{item.price}}</span>￥<s>{{item.old_price}}</s>
+                                <div class="star">
+                                    <el-rate
+                                        v-model= item.star
+                                        disabled
+                                        text-color="#ff9900">
+                                    </el-rate>
+                                </div>
+                            </router-link>
+                        </el-card>
+                    </el-col>
+                </el-row>
                 <div class="page">
                     <el-pagination
                         layout="prev, pager, next"
@@ -96,22 +112,24 @@
                 </div>
             </div>
         </div>
-        <footers></footers>
     </div>
 </template>
 <script>
-    import MainNav from './ChildComponents/TopNav'
-    import Footers from './ChildComponents/Footers'
-    import Card from './ChildComponents/Card'
     export default{
         data(){
             return {
-                value: 0
+                value: 0,
+                items:[]
             }
         },
-        components: {
-            MainNav, Footers, Card
-        },
+        method:{
+            handleOpen(){
+
+            },
+            handleClose(){
+
+            }
+        }
     }
 </script>
 <style scoped>
@@ -242,5 +260,22 @@
     }
     .footer{
         margin-top: 30px;
+    }
+
+    .card {
+        display: inline-block;
+        width: 270px;
+        height: 460px;
+        text-align: center;
+        margin: 8px;
+    }
+    img + h3 {
+        width: 270px;
+        margin: 15px auto;
+        font-size: 14px;
+        font-weight: normal;
+    }
+    .star {
+        margin: 10px;
     }
 </style>

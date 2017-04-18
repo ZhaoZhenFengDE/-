@@ -1,8 +1,7 @@
 <template>
     <div class="g-doc">
-        <main-nav></main-nav>
         <div class="banner">
-            <router-link>
+            <router-link to="/products/pud">
                 <div class="u-txt">
                     <h3 class="classify">FLOWERS</h3>
                     <h2 class="u-txt-hd">花头饰带</h2>
@@ -36,18 +35,82 @@
             </div>
         </div>
         <div class="g-sort">
-            <el-tabs id="sort" v-model="activeName" @tab-click="handleClick">
+            <el-tabs id="sort" v-model="activeName">
                 <el-tab-pane label="花束" name="first">
-                    <card></card>
+                    <el-row>
+                        <el-col :span="6" v-for="(item,index) in items">
+                            <router-link :to="{name:'ProductsDetail',query: { id: item.commodity_id }}">
+                                <el-card class="card" :body-style="{padding:'0'}">
+                                    <img :src="item.commodity_pic" class="image">
+                                    <h3>{{item.commodity_name}}</h3>
+                                    <span>￥{{item.price}}</span> ￥<s>{{item.old_price}}</s>
+                                    <div class="star">
+                                        <el-rate
+                                            v-model = item.star
+                                            disabled
+                                            text-color="#ff9900">
+                                        </el-rate>
+                                    </div>
+                                </el-card>
+                            </router-link>
+                        </el-col>
+                    </el-row>
                 </el-tab-pane>
                 <el-tab-pane label="婚礼" name="second">
-                    <card></card>
+                    <el-row>
+                        <el-col :span="6" v-for="item in items">
+                            <el-card class="card" :body-style="{padding:'0'}">
+                                <img :src = "item.commodity_pic" class="image">
+                                <h3>{{item.commodity_name}}</h3>
+                                <span>￥{{item.price}}</span>￥<s>{{item.old_price}}</s>
+                                <div class="star">
+                                    <el-rate
+                                        v-model = item.star
+                                        disabled
+                                        text-color="#ff9900">
+                                    </el-rate>
+                                </div>
+                            </el-card>
+                        </el-col>
+                    </el-row>
                 </el-tab-pane>
                 <el-tab-pane label="家居装饰" name="third">
-                    <card></card>
+                    <el-row>
+                        <el-col :span="6" v-for="(item,index) in items">
+                            <el-card class="card" :body-style="{padding:'0'}">
+                                <img :src = "item.commodity_pic" class="image">
+                                <h3>{{item.commodity_name}}</h3>
+                                <span>￥{{item.price}}</span>￥<s>{{item.old_price}}</s>
+                                <div class="star">
+                                    <el-rate
+                                        v-model= item.star
+                                        disabled
+                                        text-color="#ff9900">
+                                    </el-rate>
+                                </div>
+                            </el-card>
+                        </el-col>
+                    </el-row>
                 </el-tab-pane>
                 <el-tab-pane label="流行" name="fourth">
-                    <card></card>
+                    <el-row>
+                        <el-col :span="6" v-for="item in items">
+                            <el-card class="card" :body-style="{padding:'0'}">
+                                <router-link :to="{ path: '/products/pud/', query: { id: item.commodity_id }}">
+                                    <img :src = "item.commodity_pic" class="image">
+                                    <h3>{{item.commodity_name}}</h3>
+                                    <span>￥{{item.price}}</span>￥<s>{{item.old_price}}</s>
+                                    <div class="star">
+                                        <el-rate
+                                            v-model= item.star
+                                            disabled
+                                            text-color="#ff9900">
+                                        </el-rate>
+                                    </div>
+                                </router-link>
+                            </el-card>
+                        </el-col>
+                    </el-row>
                 </el-tab-pane>
             </el-tabs>
         </div>
@@ -73,27 +136,19 @@
                 </ul>
             </div>
         </div>
-        <footers></footers>
     </div>
 </template>
 
 <script>
-    import MainNav from './ChildComponents/TopNav'
-    import Footers from './ChildComponents/Footers'
-    import Card from './ChildComponents/Card'
     export default{
-        name: 'IndexPage',
-        data() {
+        data(){
             return {
-                activeName: 'second'
-            };
+            	activeName:'first',
+            }
         },
-        components: {
-            MainNav, Footers, Card
-        },
-        methods:{
-            handleClick(tab, event) {
-                console.log(tab, event);
+        computed:{
+            items(){
+                return this.$store.state.items;
             }
         }
     }
@@ -276,5 +331,22 @@
     }
     .g-gallery .gallery .gal-list .gal-item>img{
         width: 100%;
+    }
+    .card {
+        display: inline-block;
+        width: 270px;
+        height: 460px;
+        text-align: center;
+        margin: 8px;
+    }
+    img + h3 {
+        width: 270px;
+        margin: 15px auto;
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+    .star {
+        margin: 10px;
     }
 </style>

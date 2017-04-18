@@ -1,6 +1,5 @@
 <template>
 <div class="blog">
-    <main-nav></main-nav>
     <div class="g-bread">
         <div class="bread-crumb">
             <el-breadcrumb separator=">">
@@ -124,13 +123,10 @@
             </div>
         </div>
     </div>
-    <footers></footers>
 </div>
 </template>
 
 <script>
-    import MainNav from './ChildComponents/TopNav'
-    import Footers from './ChildComponents/Footers'
     export default{
         data(){
             return {
@@ -139,9 +135,6 @@
                 time: new Date(),
 
             }
-        },
-        components:{
-            MainNav,Footers
         }
     }
 </script>

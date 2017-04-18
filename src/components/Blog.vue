@@ -1,10 +1,9 @@
 <template>
     <div class="blog">
-        <main-nav></main-nav>
         <div class="g-bread">
             <div class="bread-crumb">
                 <el-breadcrumb separator=">">
-                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path:'/' }">首页</el-breadcrumb-item>
                     <el-breadcrumb-item>博客</el-breadcrumb-item>
                 </el-breadcrumb>
                 <h2 class="b-dis">博客首页</h2>
@@ -114,7 +113,7 @@
                                     <h5>Turpis at eleifend elit Aenean porta ac sed faucibus</h5>
                                     <p class="b-c-i-d">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...</p>
                                 </div>
-                                <span class="read-more"><router-link>Read More ></router-link></span>
+                                <span class="read-more"><router-link :to="{path:'/blogdetail'}">Read More ></router-link></span>
                             </el-card>
                         </el-col>
                     </el-row>
@@ -127,25 +126,18 @@
                 </div>
             </div>
         </div>
-        <footers></footers>
     </div>
 </template>
 
 <script>
-    import MainNav from './ChildComponents/TopNav'
-    import Footers from './ChildComponents/Footers'
 	export default{
 		data(){
 			return {
 				msg: 'Hello Vue',
                 search:'',
                 time: new Date(),
-
 			}
-		},
-        components:{
-            MainNav,Footers
-        }
+		}
 	}
 </script>
 
