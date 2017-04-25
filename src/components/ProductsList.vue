@@ -1,5 +1,6 @@
 <template>
     <div class="g-doc">
+        <main-nav></main-nav>
         <div class="g-bread">
             <div class="bread-crumb">
                 <el-breadcrumb separator=">">
@@ -14,10 +15,10 @@
                 <div class="categories">
                     <el-col>
                         <h3 class="m-subtitle">商品分类</h3>
-                        <el-menu default-active="1" @open="handleOpen" @close="handleClose" theme="dark">
+                        <el-menu default-active="1" theme="dark">
                             <el-submenu index="1">
                                 <template slot="title"><i class="el-icon-arrow-right"></i>鲜花</template>
-                                <el-menu-item index="1-1">花束</el-menu-item>
+                                <el-menu-item index="1-1" @click="getAll">花束</el-menu-item>
                                 <el-menu-item index="1-2">家居装饰</el-menu-item>
                                 <el-menu-item index="1-3">松散花</el-menu-item>
                                 <el-menu-item index="1-4">特价</el-menu-item>
@@ -55,7 +56,7 @@
                 <div class="info">
                     <el-col>
                         <h3 class="m-subtitle">信息</h3>
-                        <el-menu class="menu" default-active="1" @open="handleOpen" @close="handleClose" theme="dark">
+                        <el-menu class="menu" default-active="1" theme="dark">
                             <el-menu-item index="1-1"><i class="el-icon-arrow-right"></i>选项1</el-menu-item>
                             <el-menu-item index="1-2"><i class="el-icon-arrow-right"></i>选项2</el-menu-item>
                             <el-menu-item index="1-3"><i class="el-icon-arrow-right"></i>选项3</el-menu-item>
@@ -87,21 +88,21 @@
             </div>
             <div class="main">
                 <el-row>
-                    <el-col :span="8" v-for="item in items">
-                        <el-card class="card" :body-style="{padding:'0'}">
-                            <router-link :to="{ path: '/products/pud/'}">
-                                <img :src = "item.commodity_pic" class="image">
+                    <el-col :span="8" v-for="(item,index) in items">
+                        <router-link :to="{name:'ProductsDetail',params: { id: item.commodity_id }}">
+                            <el-card class="card" :body-style="{padding:'0'}">
+                                <img :src="item.commodity_pic" class="image">
                                 <h3>{{item.commodity_name}}</h3>
-                                <span>￥{{item.price}}</span>￥<s>{{item.old_price}}</s>
+                                <span>￥{{item.price}}</span> ￥<s>{{item.old_price}}</s>
                                 <div class="star">
                                     <el-rate
-                                        v-model= item.star
+                                        v-model = item.star
                                         disabled
                                         text-color="#ff9900">
                                     </el-rate>
                                 </div>
-                            </router-link>
-                        </el-card>
+                            </el-card>
+                        </router-link>
                     </el-col>
                 </el-row>
                 <div class="page">
@@ -112,44 +113,39 @@
                 </div>
             </div>
         </div>
+        <footers></footers>
     </div>
 </template>
 <script>
+    import MainNav from './ChildComponents/MainNav'
+    import Footers from './ChildComponents/Footers'
     export default{
         data(){
             return {
                 value: 0,
-                items:[]
+                products:[]
             }
         },
         method:{
-            handleOpen(){
-
-            },
-            handleClose(){
-
+        	getAll(type){
+        		for(let i = 0;i < this.items.length; i++){
+        			if(items[i].type === type){
+        				this.products.push(items[i])
+                    }
+                }
             }
+        },
+        computed:{
+            products(){
+                return this.$store.state.products;
+            }
+        },
+        components:{
+        	MainNav,Footers
         }
     }
 </script>
 <style scoped>
-    .g-bread {
-        min-width: 1170px;
-        height: 108px;
-        background: url("../assets/img/breadcrumb.jpg") no-repeat;
-    }
-
-    .bread-crumb {
-        width: 1170px;
-        margin: 0 auto;
-    }
-    .b-dis{
-        position: relative;
-        top: -5px;
-        font-size: 30px;
-        font-weight: normal;
-    }
-
     .main-con {
         position: relative;
         width: 1170px;

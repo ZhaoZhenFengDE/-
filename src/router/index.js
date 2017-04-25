@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Blog from '@/components/Blog'
+import Index from '@/components/Index'
+import Article from '@/components/Article'
 import CheckOut from '@/components/CheckOut'
-import Article from '@/components/BlogDetail'
-import IndexPage from '@/components/IndexPage'
 import ProductsList from '@/components/ProductsList'
-import ProductsDetail from '@/components/ProductsDetail'
+import ProductDetail from '@/components/ProductDetail'
 
 
 Vue.use(Router);
@@ -14,8 +14,8 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'IndexPage',
-            component: IndexPage
+            name: 'Index',
+            component: Index
         },
         {
             path:'/products',
@@ -23,9 +23,9 @@ export default new Router({
             component: ProductsList,
         },
         {
-            path:"/products/pud/",
-            name:'ProductsDetail',
-            component:ProductsDetail
+            path:"/products/pud/:id",
+            name:'ProductDetail',
+            component:ProductDetail
         },
         {
             path:'/checkout',
@@ -38,9 +38,9 @@ export default new Router({
             component:Blog
         },
         {
-            path:'/article',
-            name:'Article',
-            component:Article
+            path:'/article/:id',
+            name: 'Article',
+            component: Article
         }
     ]
 })

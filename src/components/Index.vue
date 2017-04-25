@@ -1,5 +1,6 @@
 <template>
     <div class="g-doc">
+        <main-nav></main-nav>
         <div class="banner">
             <router-link to="/products/pud">
                 <div class="u-txt">
@@ -38,8 +39,8 @@
             <el-tabs id="sort" v-model="activeName">
                 <el-tab-pane label="花束" name="first">
                     <el-row>
-                        <el-col :span="6" v-for="(item,index) in items">
-                            <router-link :to="{name:'ProductsDetail',query: { id: item.commodity_id }}">
+                        <el-col :span="6" v-for="(item,index) in products">
+                            <router-link :to="{name:'ProductDetail',params: { id: item.commodity_id }}">
                                 <el-card class="card" :body-style="{padding:'0'}">
                                     <img :src="item.commodity_pic" class="image">
                                     <h3>{{item.commodity_name}}</h3>
@@ -58,7 +59,7 @@
                 </el-tab-pane>
                 <el-tab-pane label="婚礼" name="second">
                     <el-row>
-                        <el-col :span="6" v-for="item in items">
+                        <el-col :span="6" v-for="item in products">
                             <el-card class="card" :body-style="{padding:'0'}">
                                 <img :src = "item.commodity_pic" class="image">
                                 <h3>{{item.commodity_name}}</h3>
@@ -76,7 +77,7 @@
                 </el-tab-pane>
                 <el-tab-pane label="家居装饰" name="third">
                     <el-row>
-                        <el-col :span="6" v-for="(item,index) in items">
+                        <el-col :span="6" v-for="(item,index) in products">
                             <el-card class="card" :body-style="{padding:'0'}">
                                 <img :src = "item.commodity_pic" class="image">
                                 <h3>{{item.commodity_name}}</h3>
@@ -94,7 +95,7 @@
                 </el-tab-pane>
                 <el-tab-pane label="流行" name="fourth">
                     <el-row>
-                        <el-col :span="6" v-for="item in items">
+                        <el-col :span="6" v-for="item in products">
                             <el-card class="card" :body-style="{padding:'0'}">
                                 <router-link :to="{ path: '/products/pud/', query: { id: item.commodity_id }}">
                                     <img :src = "item.commodity_pic" class="image">
@@ -136,10 +137,13 @@
                 </ul>
             </div>
         </div>
+        <footers></footers>
     </div>
 </template>
 
 <script>
+    import MainNav from './ChildComponents/MainNav'
+    import Footers from './ChildComponents/Footers'
     export default{
         data(){
             return {
@@ -147,9 +151,12 @@
             }
         },
         computed:{
-            items(){
-                return this.$store.state.items;
+            products(){
+                return this.$store.state.products;
             }
+        },
+        components:{
+        	MainNav,Footers
         }
     }
 </script>

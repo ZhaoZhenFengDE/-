@@ -10,26 +10,34 @@ import VueAxios from 'vue-axios'
 import Vuex from 'vuex'
 
 Vue.prototype.$ajax = axios;
-Vue.use(Element,VueAxios)
+Vue.use(Element, VueAxios)
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-   state:{
-       items:[],
-       item:[]
-   },
-   mutations:{
-       GET_ITEMS_LIST(state,items){
-           state.items  = items
-       }
-   },
-    actions:{
-       GET_ITEMS(store){
-           axios.get('http://huali.com/api/preview').then((response)=>{
-               store.commit('GET_ITEMS_LIST', response.data);
-           })
-       }
-    }
+    state: {
+        products: [],
+        articles: []
+    },
+    mutations: {
+        GET_ITEMS_LIST(state, items){
+            state.products = items;
+        },
+        GET_ARTICLES_DESC_LIST(state, items){
+            state.articles = items;
+        }
+    },
+    actions: {
+        GET_ITEMS(store){
+            axios.get('http://huali.com/api/preview').then((response) => {
+                store.commit('GET_ITEMS_LIST', response.data);
+            })
+        },
+        GET_ARTICLES_DESC(store){
+            axios.get('http://huali.com/api/blog').then((response) => {
+                store.commit('GET_ARTICLES_DESC_LIST', response.data);
+            })
+        }
+    },
 });
 
 new Vue({

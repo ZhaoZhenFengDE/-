@@ -1,0 +1,310 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 12px;
+    font-family: "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif;;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a:link {
+    text-decoration: none;
+    color: #343434;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #343434;
+}
+
+a:active {
+    text-decoration: none;
+    color: #343434;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #343434;
+}
+
+.clearfix:after {
+    content: '.';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.g-tb {
+    height: 50px;
+    background-color: #333;
+    color: #999;
+    font: 14px/50px "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif;
+}
+
+.g-tb .m-tb {
+    position: relative;
+    margin: 0 auto;
+    width: 1170px;
+    height: 50px;
+}
+
+.g-tb .m-tb .u-tb {
+    position: absolute;
+}
+
+.g-tb .m-tb .u-tbl > li {
+    margin-right: 20px;
+}
+
+.g-tb .m-tb .u-tbr {
+    right: 0;
+}
+
+.g-tb .m-tb .u-tb .u-li {
+    display: inline-block;
+    color: #fff;
+}
+
+.g-tb .m-tb .u-tbr .u-li {
+    text-align: center;
+}
+
+.g-tb .m-tb .u-tbr .u-li span {
+    display: inline-block;
+    width: 70px;
+    text-align: center;
+}
+
+.g-tb .m-tb .u-tbr .u-sp::after {
+    content: '|';
+}
+
+.g-tb .m-tb .u-tb .u-li a {
+    color: #fff;
+}
+
+/* End Top Bar */
+/* LOGO AND NAV */
+.g-hd {
+    position: relative;
+    margin: 0 auto;
+    width: 1170px;
+    height: 100px;
+    font: 16px/100px "Lucida Grande", Lucida Sans Unicode, Hiragino Sans GB, WenQuanYi Micro Hei, Verdana, Aril, sans-serif;
+}
+
+.g-hd .m-lg {
+    position: relative;
+}
+
+.g-hd .m-lg .u-logo {
+    position: absolute;
+    left: 0;
+    top: 35px;
+    width: 24px;
+    height: 28px;
+    background: url("../img/logo.png") no-repeat;
+}
+
+.g-hd .m-lg .u-title {
+    position: absolute;
+    width: 300px;
+    left: 40px;
+    font-size: 24px;
+    font-weight: normal;
+    color: #343434;
+}
+
+.g-hd .m-nav {
+    position: absolute;
+    right: 128px;
+}
+
+.g-hd .m-nav .u-nav li {
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.g-hd .m-nav .u-nav .nav-item {
+    font-size: 16px;
+}
+
+.g-hd .sear-cart {
+    position: absolute;
+    height: 20px;
+    right: 20px;
+}
+
+.g-hd .sear-cart > span {
+    display: inline-block;
+    margin-left: 22px;
+    cursor: pointer;
+}
+
+.g-hd .sear-cart .search {
+    position: relative;
+    top: 2px;
+}
+
+.g-hd .sear-cart .cart {
+    position: relative;
+    width: 30px;
+    height: 25px;
+    top: 1px;
+}
+
+.g-hd .sear-cart .cart-num {
+    display: inline-block;
+    position: absolute;
+    top: 30px;
+    right: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #e6c302;
+    font-style: normal;
+    line-height: 18px;
+    text-align: center;
+    color: #fff;
+}
+
+.hidden {
+    display: none;
+}
+
+/*显示购物车详情*/
+.cart-list {
+
+}
+
+.footer {
+    position: relative;
+    background: #333;
+    height: 402px;
+    overflow: hidden;
+}
+
+.u-ft {
+    position: relative;
+    width: 1170px;
+    margin: 0 auto;
+}
+
+.u-ft .u-list {
+    position: absolute;
+    top: 70px;
+    color: #999999;
+}
+
+.u-ft .u-list > dt {
+    font: 16px/40px microsoft yahei;
+}
+
+.u-ft .u-list > dd {
+    font: 14px/20px microsoft yahei;
+}
+
+.u-list .u-item > a span {
+    color: #999999;
+}
+
+.u-ft .u-about {
+    left: 0;
+    width: 370px;
+
+}
+
+.u-ft .u-info {
+    left: 500px;
+    width: 130px;
+}
+
+.u-ft .u-acc {
+    left: 700px;
+    width: 130px;
+}
+
+.u-ft .u-optime {
+    left: 900px;
+}
+
+#hr {
+    position: absolute;
+    width: 3000px;
+    top: 336px;
+    color: #666666;
+}
+
+.u-cr {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    color: #999999;
+}
+
+.u-cr > span {
+    display: block;
+    width: 536px;
+    text-align: center;
+}
+
+/*面包屑导航部分*/
+
+.g-bread {
+    min-width: 1170px;
+    height: 108px;
+    background: url("../img/breadcrumb.jpg") no-repeat;
+}
+.bread-crumb {
+    width: 1170px;
+    margin: 0 auto;
+}
+.b-dis {
+    position: relative;
+    top: -5px;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+
+

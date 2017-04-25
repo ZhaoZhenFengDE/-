@@ -1,11 +1,12 @@
 <template>
     <div class="detail">
+        <main-nav></main-nav>
         <div class="item">
             <div class="g-bread">
                 <div class="bread-crumb">
                     <el-breadcrumb separator=">">
                         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                        <el-breadcrumb-item :to="{ path:'/productlist' }">商品列表</el-breadcrumb-item>
+                        <el-breadcrumb-item :to="{ path:'/products' }">商品列表</el-breadcrumb-item>
                         <el-breadcrumb-item>商品详情</el-breadcrumb-item>
                     </el-breadcrumb>
                     <h2 class="b-dis">商品详情</h2>
@@ -16,34 +17,34 @@
                     <div class="d-img">
                         <div class="show-img">
                             <div class="s-img">
-                                <img :src=product[0].commodity_pic alt="">
+                                <img :src=product.commodity_pic alt="" width="100%">
                             </div>
                             <ul class="show-item">
-                                <li class="img-item active"><img width="100%" :src=product[0].commodity_pic alt=""></li>
-                                <li class="img-item"><img width="100%" :src=product[0].commodity_pic alt=""></li>
-                                <li class="img-item"><img width="100%" :src=product[0].commodity_pic alt=""></li>
-                                <li class="img-item"><img width="100%" :src=product[0].commodity_pic alt=""></li>
+                                <li class="img-item active"><img width="100%" :src=product.commodity_pic alt=""></li>
+                                <li class="img-item"><img width="100%" :src=product.commodity_pic alt=""></li>
+                                <li class="img-item"><img width="100%" :src=product.commodity_pic alt=""></li>
+                                <li class="img-item"><img width="100%" :src=product.commodity_pic alt=""></li>
                             </ul>
                         </div>
                     </div>
                     <div class="d-items clearfix">
-                        <h2 class="fg-name">{{ product[0].commodity_name}}</h2>
+                        <h2 class="fg-name">{{ product.commodity_name}}</h2>
                         <ul class="shop">
                             <li class="shop-item">
                                 <el-rate
-                                    v-model="product[0].star"
+                                    v-model="product.star"
                                     disabled
                                     text-color="#ff9900">
                                 </el-rate>
                             </li>
-                            <li class="shop-item"><span>￥{{ product[0].price }}</span> ￥<s>{{ product[0].old_price }}</s></li>
-                            <li class="shop-item"><span>编号：</span>{{ product[0].commodity_id }}</li>
-                            <li class="shop-item"><span>类别：</span>{{ product[0].category }}</li>
-                            <li class="shop-item"><span>包装：</span>{{ product[0].package }}</li>
-                            <li class="shop-item"><span>材料：</span>{{ product[0].material }}</li>
-                            <li class="shop-item"><span>花语：</span>{{ product[0].flw_lan }}</li>
-                            <li class="shop-item"><span>配送：</span>{{ product[0].distribution }}</li>
-                            <li class="shop-item"><span>附送：</span>{{ product[0].include}}</li>
+                            <li class="shop-item"><span>￥{{ product.price }}</span> <s>￥ {{ product.old_price }}</s></li>
+                            <li class="shop-item"><span>编号：</span>{{ product.commodity_id }}</li>
+                            <li class="shop-item"><span>类别：</span>{{ product.category }}</li>
+                            <li class="shop-item"><span>包装：</span>{{ product.package }}</li>
+                            <li class="shop-item"><span>材料：</span>{{ product.material }}</li>
+                            <li class="shop-item"><span>花语：</span>{{ product.flw_lan }}</li>
+                            <li class="shop-item"><span>配送：</span>{{ product.distribution }}</li>
+                            <li class="shop-item"><span>附送：</span>{{ product.include}}</li>
                             <li class="shop-item ls-num">
                                 <span class="s-num">数量：</span>
                                 <el-input-number class="shop-num" v-model="num" @change="handleChange" :min="1"
@@ -69,8 +70,8 @@
             <div class="relate">
                 <h3>相关产品</h3>
                 <el-row>
-                    <el-col :span="6" v-for="(item,index) in items">
-                        <router-link :to="{name:'ProductsDetail',query: { id: item.commodity_id }}">
+                    <el-col :span="6" v-for="(item,index) in products">
+                        <router-link :to="{ name:'ProductDetail', params : { id: item.commodity_id }}">
                             <el-card class="card" :body-style="{padding:'0'}">
                                 <img :src="item.commodity_pic" class="image">
                                 <h3>{{item.commodity_name}}</h3>
@@ -88,53 +89,54 @@
                 </el-row>
             </div>
         </div>
+        <footers></footers>
     </div>
 </template>
 
 <script>
+    import MainNav from './ChildComponents/MainNav'
+    import Footers from './ChildComponents/Footers'
     export default{
-        data () {
-            return {
-            	activeName:'first',
-                product:[]
-            }
-        },
         created () {
-            this.$ajax.get('http://huali.com/api/category/' + this.$route.query.id).then((response) => {
-                this.product = response.data;
-            })
+            this.fetchData();
         },
         computed:{
-            items(){
-                return this.$store.state.items.slice(0,4);
+            products(){
+                return this.$store.state.products.slice(0,4);
             }
+        },
+        data () {
+            return {
+                activeName:'first',
+                product:null,
+                loading: false,
+                error: null
+            }
+        },
+        watch: {
+            '$route': 'fetchData'
+        },
+        methods: {
+            fetchData () {
+                this.error = this.product = null;
+                this.loading = true;
+                this.$ajax.get('http://huali.com/api/product/'+ this.$route.params.id).then((response)=>{
+                    this.product = response.data;
+                    this.loading = false;
+                });
+            }
+        },
+        components:{
+        	MainNav,Footers
         }
     }
 </script>
 
-<style scoped>
+<style>
 
     .details {
         width: 1170px;
         height: 800px;
-    }
-
-    .g-bread {
-        min-width: 1170px;
-        height: 108px;
-        background: url("../assets/img/breadcrumb.jpg") no-repeat;
-    }
-
-    .bread-crumb {
-        width: 1170px;
-        margin: 0 auto;
-    }
-
-    .b-dis {
-        position: relative;
-        top: -5px;
-        font-size: 30px;
-        font-weight: normal;
     }
 
     .buy {

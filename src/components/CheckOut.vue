@@ -1,5 +1,6 @@
 <template>
     <div class="checkout">
+        <main-nav></main-nav>
         <div class="g-bread">
             <div class="bread-crumb">
                 <el-breadcrumb separator=">">
@@ -91,9 +92,12 @@
                 </dl>
             </div>
         </div>
+        <footers></footers>
     </div>
 </template>
 <script>
+    import MainNav from './ChildComponents/MainNav'
+    import Footers from './ChildComponents/Footers'
     export default {
         data(){
             return {
@@ -132,13 +136,13 @@
         methods: {
         },
         created(){
-            this.$http.get('http://huali.com/api/province').then((response) => {
+            this.$ajax.get('http://huali.com/api/province').then((response) => {
                 for (let i = 0; i < response.data.length; i++) {
                     this.options[i] = {};
                     this.options[i].value = response.data[i].value;
                     this.options[i].label = response.data[i].province;
                     this.options[i].cities = [];
-                    this.$http.get('http://huali.com/api/cities/' + response.data[i].value).then((response) => {
+                    this.$ajax.get('http://huali.com/api/cities/' + response.data[i].value).then((response) => {
                         for (let a = 0; a < response.data.length; a++) {
                             this.options[i].cities[a] = {};
                             this.options[i].cities[a].value = response.data[a].value;
@@ -149,29 +153,14 @@
                 }
                 return;
             });
+        },
+        components:{
+        	MainNav,Footers
         }
     }
 </script>
 
 <style scoped>
-    .g-bread {
-        min-width: 1170px;
-        height: 108px;
-        background: url("../assets/img/breadcrumb.jpg") no-repeat;
-    }
-
-    .bread-crumb {
-        width: 1170px;
-        margin: 0 auto;
-    }
-
-    .b-dis {
-        position: relative;
-        top: -5px;
-        font-size: 30px;
-        font-weight: normal;
-    }
-
     .main-content {
         position: relative;
         width: 1170px;
