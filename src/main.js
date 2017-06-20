@@ -15,12 +15,34 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        products: [],
+        allProducts:[],
+        products:{
+            flowers:[],
+            cakes:[],
+            gifts:[],
+            chocolate:[],
+        },
         articles: []
     },
     mutations: {
         GET_ITEMS_LIST(state, items){
-            state.products = items;
+            state.allProducts = items;
+            for(let i = 0; i < items.length; i++){
+                switch(items[i].cate_id){
+                    case 6:
+                        state.products.flowers.push(items[i])
+                        break;
+                    case 7:
+                        state.products.cakes.push(items[i])
+                        break;
+                    case 8:
+                        state.products.gifts.push(items[i])
+                        break;
+                    case 9:
+                        state.products.chocolate.push(items[i])
+                        break;
+                }
+            }
         },
         GET_ARTICLES_DESC_LIST(state, items){
             state.articles = items;

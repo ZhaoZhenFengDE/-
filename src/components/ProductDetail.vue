@@ -47,7 +47,7 @@
                             <li class="shop-item"><span>附送：</span>{{ product.include}}</li>
                             <li class="shop-item ls-num">
                                 <span class="s-num">数量：</span>
-                                <el-input-number class="shop-num" v-model="num" @change="handleChange" :min="1"
+                                <el-input-number class="shop-num" v-model="num" :min="1"
                                                  :max="10"></el-input-number>
                             </li>
                         </ul>
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="infor">
-                <el-tabs v-model="activeName" @tab-click="handleClick">
+                <el-tabs v-model="activeName">
                     <el-tab-pane label="商品详情" name="first">商品详情</el-tab-pane>
                     <el-tab-pane label="附加信息" name="second">附加信息</el-tab-pane>
                     <el-tab-pane label="评价信息" name="third">评价信息</el-tab-pane>
@@ -70,7 +70,7 @@
             <div class="relate">
                 <h3>相关产品</h3>
                 <el-row>
-                    <el-col :span="6" v-for="(item,index) in products">
+                    <el-col :span="6" v-for="(item,index) in products.flowers">
                         <router-link :to="{ name:'ProductDetail', params : { id: item.commodity_id }}">
                             <el-card class="card" :body-style="{padding:'0'}">
                                 <img :src="item.commodity_pic" class="image">
@@ -102,7 +102,7 @@
         },
         computed:{
             products(){
-                return this.$store.state.products.slice(0,4);
+                return this.$store.state.products;
             }
         },
         data () {
@@ -110,7 +110,8 @@
                 activeName:'first',
                 product:null,
                 loading: false,
-                error: null
+                error: null,
+                num:1
             }
         },
         watch: {

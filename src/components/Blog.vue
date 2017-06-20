@@ -83,29 +83,35 @@
                 <div class="latest-blog">
                     <div class="blog-banner">
                         <img src="../assets/img/blogbanner.jpg" alt="">
-                        <div class="blog-detail"><span>作者：</span> {{article.blog_editor}} <i class="el-icon-date"></i> {{article.created_at}}</div>
+                        <div class="blog-detail"><span>作者：</span> {{article[0].blog_editor}} <i class="el-icon-date"></i> {{article[0].created_at.date.substr(0,19)}}</div>
                     </div>
                     <article class="blog-article">
-                        <header class="b-header"><h4>Nullam ullamcorper nisl quis ornare molestie</h4></header>
+                        <header class="b-header"><h4>{{article[0].blog_title}}</h4></header>
                         <section class="b-sec">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            {{article[0].blog_description}}
                         </section>
-                        <footer class="b-foot">Read More ></footer>
+                        <footer class="b-foot">
+                            <router-link :to="{name:'Article',params:{ id:article[0].blog_id}}">Read More ></router-link>
+                        </footer>
                     </article>
                 </div>
                 <div class="blog-card clearfix">
                     <el-row>
-                        <el-col :span="8" v-for="(article, index) in blog">
+                        <el-col :span="8" v-for="(item, index) in blog">
+                        <router-link :to="{name:'Article' ,params: { id: item.blog_id }}">
                             <el-card class="blog-card-item" :body-style="{padding:'0'}">
                                 <img src="../assets/img/articleimg.jpg" class="image">
                                 <div>
-                                    <h5>{{article.blog_title}}</h5>
+                                    <h5>{{item.blog_title}}</h5>
                                     <div class="b-c-i-d">
-                                        {{article.blog_description}}
+                                        {{item.blog_description}}
                                     </div>
                                 </div>
-                                <span class="read-more"><router-link :to="{name:'Article' ,params: { id: article.blog_id }}">Read More ></router-link></span>
+                                <span class="read-more">
+                                    Read More >  
+                                </span>
                             </el-card>
+                            </router-link>
                         </el-col>
                     </el-row>
                 </div>
@@ -238,7 +244,7 @@
     .blog-main .latest-blog{
         position: relative;
         width: 870px;
-        height: 780px;
+        height: 710px;
         border-bottom: 1px solid #eaeaea;
     }
     .blog-main .latest-blog .blog-banner{
@@ -260,7 +266,6 @@
     .blog-main .latest-blog .blog-article{
         margin-top: 24px;
         width: 870px;
-        height: 166px;
     }
     .blog-main .latest-blog .blog-article .b-header>h4{
         width: 870px;
@@ -291,6 +296,9 @@
         width: 270px;
         font-size: 15px;
         line-height:20px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
     }
     .blog-main .blog-card .blog-card-item .b-c-i-d{
         margin-top: 20px;

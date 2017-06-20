@@ -6,7 +6,8 @@ import Article from '@/components/Article'
 import CheckOut from '@/components/CheckOut'
 import ProductsList from '@/components/ProductsList'
 import ProductDetail from '@/components/ProductDetail'
-
+import AllProducts from '@/components/ChildComponents/AllProducts'
+import Product from '@/components/ChildComponents/Products'
 
 Vue.use(Router);
 
@@ -19,8 +20,19 @@ export default new Router({
         },
         {
             path:'/products',
-            name:'ProductsList',
             component: ProductsList,
+            children:[
+                {
+                    path:'',
+                    name:'ProductsList',
+                    component:AllProducts
+                },
+                {
+                    path:'product/:id',
+                    name:'Product',
+                    component:Product
+                }
+            ]
         },
         {
             path:"/products/pud/:id",

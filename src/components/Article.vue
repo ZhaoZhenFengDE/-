@@ -5,9 +5,9 @@
             <div class="bread-crumb">
                 <el-breadcrumb separator=">">
                     <el-breadcrumb-item :to="{ path:'/' }">首页</el-breadcrumb-item>
-                    <el-breadcrumb-item>博客</el-breadcrumb-item>
+                    <el-breadcrumb-item>{{article.blog_title}}</el-breadcrumb-item>
                 </el-breadcrumb>
-                <h2 class="b-dis">博客首页</h2>
+                <h2 class="b-dis">{{article.blog_title}}</h2>
             </div>
         </div>
         <div class="main-con clearfix">
@@ -55,5 +55,14 @@
 </script>
 
 <style>
-
+    .main-con{
+        margin: 0 auto;
+        width: 1170px;
+        font-size: 16px;
+        line-height: 18px;
+    }
+    .main-con strong{
+        font-size: 18px;
+        line-height: 20px;
+    }
 </style>

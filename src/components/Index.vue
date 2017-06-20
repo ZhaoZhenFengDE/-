@@ -2,15 +2,13 @@
     <div class="g-doc">
         <main-nav></main-nav>
         <div class="banner">
-            <router-link to="/products/pud">
-                <div class="u-txt">
-                    <h3 class="classify">FLOWERS</h3>
-                    <h2 class="u-txt-hd">花头饰带</h2>
-                    <p class="u-txt-art">
-                        玫瑰是爱情的最佳代言人，不少新人拍婚纱照，首选玫瑰，但玫瑰的颜色不同含义也有所区别：红玫瑰代表：深爱着你；粉色玫瑰表示：动情在心、爱的宣言；白玫瑰则表示：天真、纯洁、尊敬的含义。</p>
-                    <a class="a-shop" href="www.lthuali.com"><span>现在购买</span></a>
-                </div>
-            </router-link>
+            <el-carousel indicator-position="outside" class="u-banner">
+                <el-carousel-item v-for="item in 4" :key="item">
+                    <router-link to="/products/pud">
+                    <img src="../assets/img/banner1.jpg" alt="">
+                    </router-link>
+                </el-carousel-item>
+            </el-carousel>
         </div>
         <div class="g-pro">
             <div class="item article article-l">
@@ -37,9 +35,9 @@
         </div>
         <div class="g-sort">
             <el-tabs id="sort" v-model="activeName">
-                <el-tab-pane label="花束" name="first">
+                <el-tab-pane label="鲜花" name="first">
                     <el-row>
-                        <el-col :span="6" v-for="(item,index) in products">
+                        <el-col :span="6" v-for="(item,index) in products.flowers">
                             <router-link :to="{name:'ProductDetail',params: { id: item.commodity_id }}">
                                 <el-card class="card" :body-style="{padding:'0'}">
                                     <img :src="item.commodity_pic" class="image">
@@ -57,9 +55,9 @@
                         </el-col>
                     </el-row>
                 </el-tab-pane>
-                <el-tab-pane label="婚礼" name="second">
+                <el-tab-pane label="蛋糕" name="second">
                     <el-row>
-                        <el-col :span="6" v-for="item in products">
+                        <el-col :span="6" v-for="item in products.cakes">
                             <el-card class="card" :body-style="{padding:'0'}">
                                 <img :src = "item.commodity_pic" class="image">
                                 <h3>{{item.commodity_name}}</h3>
@@ -75,9 +73,9 @@
                         </el-col>
                     </el-row>
                 </el-tab-pane>
-                <el-tab-pane label="家居装饰" name="third">
+                <el-tab-pane label="永生花" name="third">
                     <el-row>
-                        <el-col :span="6" v-for="(item,index) in products">
+                        <el-col :span="6" v-for="(item,index) in products.gifts">
                             <el-card class="card" :body-style="{padding:'0'}">
                                 <img :src = "item.commodity_pic" class="image">
                                 <h3>{{item.commodity_name}}</h3>
@@ -93,9 +91,9 @@
                         </el-col>
                     </el-row>
                 </el-tab-pane>
-                <el-tab-pane label="流行" name="fourth">
+                <el-tab-pane label="巧克力" name="fourth">
                     <el-row>
-                        <el-col :span="6" v-for="item in products">
+                        <el-col :span="6" v-for="item in products.chocolate">
                             <el-card class="card" :body-style="{padding:'0'}">
                                 <router-link :to="{ path: '/products/pud/', query: { id: item.commodity_id }}">
                                     <img :src = "item.commodity_pic" class="image">
@@ -166,7 +164,12 @@
         position: relative;
         min-width: 1170px;
         height: 732px;
-        background: url("../assets/img/banner.jpg") no-repeat center;
+    }
+    .u-banner{
+        height: 700px;
+    }
+    .banner .u-banner .el-carousel__container{
+        height: 700px !important;
     }
     .u-txt {
         position: absolute;
